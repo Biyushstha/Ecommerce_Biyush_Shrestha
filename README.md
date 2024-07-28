@@ -36,7 +36,7 @@
 
 Clone Repo:
 ````
-git clone https://github.com/Biyushstha/Ecommece_Biyush.git
+git clone https://github.com/Biyushstha/Ecommerce_Biyush_Shrestha.git
 ````
 Install Dependencies:
 ````
