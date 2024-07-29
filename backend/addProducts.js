@@ -11,20 +11,36 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
     const products = [
        
       {
-        name: 'Product 4',
+        name: 'Product 1',
         description: 'Description for product 1',
         price: 10.99,
         category: 'Category 1',
         stock: 100,
-        imageUrl: 'https://imgur.com/0ZXE6nS'
+        imageUrl: './images/img3.jpeg'
       },
       {
-        name: 'Product 5',
+        name: 'Product 2',
         description: 'Description for product 2',
         price: 20.99,
         category: 'Category 2',
         stock: 50,
-        imageUrl: 'http://example.com/product2.jpg'
+        imageUrl: './images/img3.jpeg'
+      },
+      {
+        name: 'Product 3',
+        description: 'Description for product 1',
+        price: 10.99,
+        category: 'Category 1',
+        stock: 100,
+        imageUrl: './images/img3.jpeg'
+      },
+      {
+        name: 'Product 4',
+        description: 'Description for product 2',
+        price: 20.99,
+        category: 'Category 2',
+        stock: 50,
+        imageUrl: './images/img3.jpeg'
       }
     ];
 
