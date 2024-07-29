@@ -38,24 +38,7 @@ Clone Repo:
 ````
 git clone https://github.com/Biyushstha/Ecommerce_Biyush_Shrestha.git
 ````
-Install Dependencies:
-````
-npm install
-npm run install-client
-````
-Copy env files
-````
-cp .env.example .env
-cd client && cp .env.example .env
-````
-Run Server
-````
-npm run server
-````
-Run Client
-````
-npm run client
-````
+
 
 
 
