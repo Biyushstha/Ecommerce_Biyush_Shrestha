@@ -1,0 +1,39 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .main-content {
+    display: flex;
+    justify-content: flex-start;
+    padding: 20px; /* Space around the content */
+  }
+  
+  .categories-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 220px; /* Adjusted width */
+    margin-left: 20px; /* Space from the left edge of the screen */
+  }
+  
+  .categories-card ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0;
+    margin: 0;
+  }
+  
+  .categories-card li {
+    margin-bottom: 10px; /* Space between items */
+  }
+  
+  .categories-card a {
+    color: #000; /* Black color for the text */
+    text-decoration: none; /* Remove underline */
+    font-size: 16px; /* Adjust text size */
+    font-weight: 600; /* Semi-bold text */
+    display: block; /* Make links block-level to add margin */
+  }
+  

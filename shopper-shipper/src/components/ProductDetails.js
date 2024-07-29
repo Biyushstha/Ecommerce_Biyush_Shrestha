@@ -2,6 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import CartContext from '../context/CartContext';
+import Header from '../components/Header'; // Adjust path if necessary
+import Footer from '../components/Footer'; // Adjust path if necessary
+import './ProductDetails.css'; // Ensure the path is correct
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -24,11 +27,15 @@ const ProductDetails = () => {
 
   return (
     <div>
-      <h1>{product.name}</h1>
-      <img src={product.imageUrl} alt={product.name} />
-      <p>{product.description}</p>
-      <p>${product.price}</p>
-      <button onClick={handleAddToCart}>Add to Cart</button>
+      <Header />
+      <div className="product-details">
+        <h1>{product.name}</h1>
+        <img src={product.imageUrl} alt={product.name} className="product-image" />
+        <p>{product.description}</p>
+        <p className="product-price">${product.price}</p>
+        <button onClick={handleAddToCart} className="add-to-cart-button">Add to Cart</button>
+      </div>
+      <Footer />
     </div>
   );
 };
