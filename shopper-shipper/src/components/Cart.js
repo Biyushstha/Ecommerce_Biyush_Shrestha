@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import CartContext from '../context/CartContext';
-import Header from '../components/Header';  // Adjust path if necessary
-import Footer from '../components/Footer';  // Adjust path if necessary
-import './Cart.css'; // Ensure the path is correct
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import { useNavigate } from 'react-router-dom';
+import './Cart.css';
 
 const Cart = () => {
   const { cart, removeFromCart, adjustQuantity } = useContext(CartContext);
+  const navigate = useNavigate();
 
   const handleRemove = (productId) => {
     removeFromCart(productId);
@@ -16,6 +18,10 @@ const Cart = () => {
     if (newQuantity > 0) {
       adjustQuantity(productId, newQuantity);
     }
+  };
+
+  const handleCheckout = () => {
+    navigate('/checkout'); // Navigate to the checkout page
   };
 
   return (
@@ -61,7 +67,7 @@ const Cart = () => {
             </tbody>
           </table>
           <div className="checkout-container">
-            <button className="checkout-button">Checkout</button>
+            <button className="checkout-button" onClick={handleCheckout}>Checkout</button>
           </div>
         </div>
       </main>

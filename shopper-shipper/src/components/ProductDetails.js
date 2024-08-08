@@ -7,7 +7,7 @@ import Footer from '../components/Footer'; // Adjust path if necessary
 import './ProductDetails.css'; // Ensure the path is correct
 
 const ProductDetails = () => {
-  const { id } = useParams();
+  const { id } = useParams(); // Get product ID from URL parameters
   const [product, setProduct] = useState(null);
   const { addToCart } = useContext(CartContext);
   const navigate = useNavigate();
@@ -30,7 +30,15 @@ const ProductDetails = () => {
       <Header />
       <div className="product-details">
         <h1>{product.name}</h1>
-        <img src={product.imageUrl} alt={product.name} className="product-image" />
+        {product.imageUrl ? (
+          <img 
+            src={`http://localhost:5001/${product.imageUrl}`} 
+            alt={product.name} 
+            className="product-image" 
+          />
+        ) : (
+          <p>No Image Available</p>
+        )}
         <p>{product.description}</p>
         <p className="product-price">${product.price}</p>
         <button onClick={handleAddToCart} className="add-to-cart-button">Add to Cart</button>

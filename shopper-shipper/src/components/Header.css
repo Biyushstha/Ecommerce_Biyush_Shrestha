@@ -1,3 +1,12 @@
+/* Add to your global CSS file to prevent horizontal scrolling */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Existing header styles */
 .header {
   width: 100%;
   background-color: #064201;
@@ -8,7 +17,8 @@
   justify-content: center; /* Center everything horizontally */
   position: relative;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  height: 60px;
+  height: 80px; /* Adjust the height as needed */
+  box-sizing: border-box; /* Include padding and border in width */
 }
 
 .header-content {
@@ -16,7 +26,8 @@
   max-width: 1200px; /* Limit the width of the content */
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Space between logo, nav, and cart */
+  justify-content: space-between; /* Space between logo, nav, and actions */
+  box-sizing: border-box; /* Include padding and border in width */
 }
 
 .header-logo a {
@@ -29,6 +40,7 @@
 .header-nav {
   display: flex;
   gap: 20px;
+  flex-wrap: nowrap; /* Prevent wrapping */
 }
 
 .header-nav a {
@@ -40,15 +52,21 @@
 .header-nav a:hover,
 .header-nav a.active {
   color: #FFD700; 
-  
 }
 
-.header-cart a {
+.header-actions {
+  display: flex;
+  gap: 20px;
+}
+
+.header-cart a,
+.header-my-orders a {
   font-size: 18px;
   color: #fff;
   text-decoration: none;
 }
 
-.header-cart a:hover {
+.header-cart a:hover,
+.header-my-orders a:hover {
   color: #FFD700; 
 }

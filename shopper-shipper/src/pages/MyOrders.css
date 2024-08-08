@@ -1,0 +1,23 @@
+.my-orders-page {
+    padding: 20px;
+  }
+  
+  .orders-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .orders-table th, .orders-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .orders-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .product-image {
+    width: 50px; /* Adjust width as needed */
+    height: auto;
+  }
+  

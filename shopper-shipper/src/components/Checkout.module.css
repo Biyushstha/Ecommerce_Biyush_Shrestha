@@ -1,0 +1,124 @@
+.checkout-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.checkout-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.checkout-form-container {
+  flex: 2;
+  margin-right: 10px;
+}
+
+.order-summary-container {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.checkout-form-card, .order-summary-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.checkout-form-card {
+  width: 100%;
+}
+
+.order-summary-card {
+  width: 80%; /* Smaller width for order summary card */
+}
+
+.checkout-form-card h1,
+.order-summary-card h2 {
+  margin-bottom: 20px;
+}
+
+.checkout-form-card label {
+  display: block; /* Makes label and input field appear on different lines */
+  margin-bottom: 10px; /* Adds space between labels and input fields */
+  font-size: 16px; /* Adjust font size if needed */
+  padding-right: 10px; /* Adds padding to the right of the label */
+}
+
+.checkout-form-card input {
+  width: calc(100% - 20px); /* Ensures padding fits inside the input field */
+  padding: 10px; /* Adds padding inside the input field */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Ensures padding is included in width */
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+.order-summary-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.product-image {
+  width: 100px;
+  height: auto;
+  margin-right: 15px;
+}
+
+.product-details {
+  flex: 1;
+}
+
+.order-summary-total {
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.coupon-section {
+  display: flex;
+  margin-top: 10px;
+}
+
+.coupon-input {
+  flex: 1;
+  padding: 8px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.apply-coupon-button {
+  padding: 8px 12px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.submit-order-button {
+  margin-top: 20px;
+  padding: 15px 20px; /* Increased padding for a larger button */
+  border: none;
+  background-color: #28a745; /* Green color */
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%; /* Makes the button take up the full width of its container */
+  max-width: 400px; /* Optional: Sets a maximum width for the button */
+  display: block; /* Ensures the button is block-level */
+  text-align: center; /* Centers the text inside the button */
+}
+
+.success-message {
+  color: green;
+  margin-top: 10px;
+}

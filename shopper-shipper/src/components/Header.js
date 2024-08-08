@@ -18,8 +18,13 @@ const Header = () => {
           <Link to="/about" className={currentPath === '/about' ? 'active' : ''}>About Us</Link>
           <Link to="/contact" className={currentPath === '/contact' ? 'active' : ''}>Contact Us</Link>
         </nav>
-        <div className="header-cart">
-          <Link to="/cart">Cart</Link>
+        <div className="header-actions">
+          <div className="header-cart">
+            <Link to="/cart">Cart</Link>
+          </div>
+          <div className="header-my-orders">
+            <Link to="/my-orders">My Orders</Link>
+          </div>
         </div>
       </div>
     </header>
