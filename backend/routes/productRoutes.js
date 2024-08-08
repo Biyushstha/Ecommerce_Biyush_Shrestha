@@ -64,7 +64,7 @@ router.post('/', upload.single('image'), async (req, res) => {
 router.put('/:id', upload.single('image'), async (req, res) => {
   try {
     const { name, description, price, category, stock } = req.body;
-    const imageUrl = req.file ? req.file.path : null;
+    const imageUrl = req.file ? req.file.path : req.body.imageUrl; // Retain existing image if no new image is provided
 
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
@@ -80,6 +80,7 @@ router.put('/:id', upload.single('image'), async (req, res) => {
     res.status(500).json({ error: 'Failed to update product' });
   }
 });
+
 
 // DELETE a product
 router.delete('/:id', async (req, res) => {

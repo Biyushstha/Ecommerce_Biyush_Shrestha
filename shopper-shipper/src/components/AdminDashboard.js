@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './AdminDashboard.css'; 
+import './AdminDashboard.css';
 
 const AdminDashboard = () => {
   const [products, setProducts] = useState([]);
@@ -69,11 +69,14 @@ const AdminDashboard = () => {
       formData.append('price', newProduct.price);
       formData.append('category', newProduct.category);
       formData.append('stock', newProduct.stock);
-      if (newProduct.imageUrl) {
+
+      if (newProduct.imageUrl && newProduct.imageUrl instanceof File) {
         formData.append('image', newProduct.imageUrl);
       }
 
-      await axios.put(`http://localhost:5001/api/products/${editProduct._id}`, formData, {
+      const url = `http://localhost:5001/api/products/${editProduct._id}`;
+
+      await axios.put(url, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -85,10 +88,10 @@ const AdminDashboard = () => {
       setShowModal(false);
 
       // Reload products
-      const response = await axios.get('http://localhost:5001/api/products');
-      setProducts(response.data);
+      const updatedProducts = await axios.get('http://localhost:5001/api/products');
+      setProducts(updatedProducts.data);
     } catch (error) {
-      console.error('Failed to update product', error);
+      console.error('Failed to update product:', error.response ? error.response.data : error.message);
       setNotification('Failed to update product.');
     }
   };
@@ -115,59 +118,119 @@ const AdminDashboard = () => {
     }
   };
 
+  // Predefined category options
+  const categories = [
+    'Fashion',
+    'Electronics',
+    'Digital Services',
+    'Cosmetics and Body Care',
+    'Food and Beverage',
+    'Furniture and Decor',
+    'Health and Wellness',
+    'Household Items',
+    'Media',
+    'Pet Care',
+    'Office Equipments',
+  ];
+
+  const openAddProductModal = () => {
+    setNewProduct({ name: '', description: '', price: '', category: '', stock: '', imageUrl: null });
+    setEditProduct(null);
+    setShowModal(true);
+  };
+
+  const openEditProductModal = (product) => {
+    setEditProduct(product);
+    setNewProduct({
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      category: product.category,
+      stock: product.stock,
+      imageUrl: null // Reset imageUrl to force user to select a new image if needed
+    });
+    setShowModal(true);
+  };
+
   return (
     <div className="admin-dashboard">
-      <h2>Admin Dashboard</h2>
+      <header>
+        <h1>Admin Dashboard</h1>
+      </header>
 
       {notification && <div className="notification">{notification}</div>}
 
-      <button onClick={() => setShowModal(true)} className="add-product-btn">Add Product</button>
+      <button onClick={openAddProductModal} className="btn btn-primary">Add Product</button>
 
       {showModal && (
         <div className="modal-overlay">
-          <div className="modal">
+          <div className="modal-content">
             <h3>{editProduct ? 'Edit Product' : 'Add Product'}</h3>
-            <input
-              type="text"
-              placeholder="Name"
-              value={editProduct ? editProduct.name : newProduct.name}
-              onChange={(e) => (editProduct ? setEditProduct({ ...editProduct, name: e.target.value }) : setNewProduct({ ...newProduct, name: e.target.value }))}
-            />
-            <input
-              type="text"
-              placeholder="Description"
-              value={editProduct ? editProduct.description : newProduct.description}
-              onChange={(e) => (editProduct ? setEditProduct({ ...editProduct, description: e.target.value }) : setNewProduct({ ...newProduct, description: e.target.value }))}
-            />
-            <input
-              type="number"
-              placeholder="Price"
-              value={editProduct ? editProduct.price : newProduct.price}
-              onChange={(e) => (editProduct ? setEditProduct({ ...editProduct, price: e.target.value }) : setNewProduct({ ...newProduct, price: e.target.value }))}
-            />
-            <input
-              type="text"
-              placeholder="Category"
-              value={editProduct ? editProduct.category : newProduct.category}
-              onChange={(e) => (editProduct ? setEditProduct({ ...editProduct, category: e.target.value }) : setNewProduct({ ...newProduct, category: e.target.value }))}
-            />
-            <input
-              type="number"
-              placeholder="Stock"
-              value={editProduct ? editProduct.stock : newProduct.stock}
-              onChange={(e) => (editProduct ? setEditProduct({ ...editProduct, stock: e.target.value }) : setNewProduct({ ...newProduct, stock: e.target.value }))}
-            />
-            <input
-              type="file"
-              onChange={(e) => (editProduct ? setEditProduct({ ...editProduct, imageUrl: e.target.files[0] }) : setNewProduct({ ...newProduct, imageUrl: e.target.files[0] }))}
-            />
-            <button onClick={handleAddOrEditProduct}>Save</button>
-            <button onClick={() => setShowModal(false)}>Cancel</button>
+            <form className="product-form">
+              <label>
+                Name
+                <input
+                  type="text"
+                  placeholder="Enter product name"
+                  value={newProduct.name}
+                  onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+                />
+              </label>
+              <label>
+                Description
+                <textarea
+                  placeholder="Enter product description"
+                  value={newProduct.description}
+                  onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
+                />
+              </label>
+              <label>
+                Price
+                <input
+                  type="number"
+                  placeholder="Enter price"
+                  value={newProduct.price}
+                  onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
+                />
+              </label>
+              <label>
+                Category
+                <select
+                  value={newProduct.category}
+                  onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
+                >
+                  <option value="" disabled>Select a category</option>
+                  {categories.map(category => (
+                    <option key={category} value={category}>{category}</option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                Stock
+                <input
+                  type="number"
+                  placeholder="Enter stock quantity"
+                  value={newProduct.stock}
+                  onChange={(e) => setNewProduct({ ...newProduct, stock: e.target.value })}
+                />
+              </label>
+              <label>
+                Image
+                <input
+                  type="file"
+                  onChange={(e) => setNewProduct({ ...newProduct, imageUrl: e.target.files[0] })}
+                />
+              </label>
+              <div className="form-buttons">
+                <button type="button" onClick={handleAddOrEditProduct} className="btn btn-success">Save</button>
+                <button type="button" onClick={() => setShowModal(false)} className="btn btn-secondary">Cancel</button>
+              </div>
+            </form>
           </div>
         </div>
       )}
 
-      <table>
+      <table className="product-table">
         <thead>
           <tr>
             <th>Name</th>
@@ -184,13 +247,13 @@ const AdminDashboard = () => {
             <tr key={product._id}>
               <td>{product.name}</td>
               <td>{product.description}</td>
-              <td>{product.price}</td>
+              <td>${product.price.toFixed(2)}</td>
               <td>{product.category}</td>
               <td>{product.stock}</td>
-              <td><img src={`http://localhost:5001/${product.imageUrl}`} alt={product.name} width="100" /></td>
+              <td><img src={`http://localhost:5001/${product.imageUrl}`} alt={product.name} className="product-image" /></td>
               <td>
-                <button onClick={() => { setEditProduct(product); setShowModal(true); }}>Edit</button>
-                <button onClick={() => handleDeleteProduct(product._id)}>Delete</button>
+                <button onClick={() => openEditProductModal(product)} className="btn btn-warning">Edit</button>
+                <button onClick={() => handleDeleteProduct(product._id)} className="btn btn-danger">Delete</button>
               </td>
             </tr>
           ))}

@@ -1,8 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../components/Header';  // Adjust path if necessary
-import Footer from '../components/Footer';  // Adjust path if necessary
-import './HomePage.css'; // Ensure the path is correct
+import Header from '../components/Header';  
+import Footer from '../components/Footer';  
+import './HomePage.css';
+
+const categories = [
+  "Fashion",
+  "Electronics",
+  "Digital Services",
+  "Cosmetics and Body Care",
+  "Food and Beverage",
+  "Furniture and Decor",
+  "Health and Wellness",
+  "Household Items",
+  "Media",
+  "Pet Care",
+  "Office Equipments"
+];
 
 const HomePage = () => {
   return (
@@ -11,9 +25,11 @@ const HomePage = () => {
       <main className="main-content">
         <div className="categories-card">
           <ul>
-            <li><Link to="/products?category=Category 1">Category 1</Link></li>
-            <li><Link to="/products?category=Category 2">Category 2</Link></li>
-            
+            {categories.map((category, index) => (
+              <li key={index}>
+                <Link to={`/products?category=${encodeURIComponent(category)}`}>{category}</Link>
+              </li>
+            ))}
           </ul>
         </div>
       </main>
