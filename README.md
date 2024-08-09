@@ -53,14 +53,15 @@ Install Server:
 ````
 npm run install-server
 ````
-Run Client:
-````
-npm run start-client
-````
 Run Server:
 ````
 npm run start-server
 ````
+Run Client:
+````
+npm run start-client
+````
+
 
 **Shop URL**: http://localhost:3000/
 
