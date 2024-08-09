@@ -6,7 +6,18 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   const addToCart = (product) => {
-    setCart(prevCart => [...prevCart, product]);
+    setCart(prevCart => {
+      const existingProductIndex = prevCart.findIndex(item => item._id === product._id);
+      if (existingProductIndex >= 0) {
+        // If the product exists in the cart, update its quantity
+        const updatedCart = [...prevCart];
+        updatedCart[existingProductIndex].quantity += product.quantity;
+        return updatedCart;
+      } else {
+        // If the product does not exist, add it to the cart
+        return [...prevCart, product];
+      }
+    });
   };
 
   const removeFromCart = (productId) => {
@@ -14,11 +25,12 @@ export const CartProvider = ({ children }) => {
   };
 
   const adjustQuantity = (productId, quantity) => {
-    setCart(prevCart =>
-      prevCart.map(item =>
+    setCart(prevCart => {
+      const updatedCart = prevCart.map(item => 
         item._id === productId ? { ...item, quantity } : item
-      )
-    );
+      );
+      return updatedCart;
+    });
   };
 
   return (

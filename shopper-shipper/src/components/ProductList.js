@@ -62,10 +62,10 @@ const ProductList = () => {
               <img 
                 src={`http://localhost:5001/${product.imageUrl}`} 
                 alt={product.name} 
-                className="product-image"
+                className="product-list-image"
               />
-              <h2 className="product-name">{product.name}</h2>
-              <p className="product-price">${product.price}</p>
+              <h2 className="product-list-name">{product.name}</h2>
+              <p className="product-list-price">${product.price}</p>
               <Link to={`/products/${product._id}`} className="view-details-link">View Details</Link>
             </div>
           ))}

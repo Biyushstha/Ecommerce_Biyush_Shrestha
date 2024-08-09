@@ -13,6 +13,20 @@ const Cart = () => {
     removeFromCart(productId);
   };
 
+  const increaseQuantity = (productId) => {
+    const item = cart.find(item => item._id === productId);
+    adjustQuantity(productId, item.quantity + 1);
+  };
+
+  const decreaseQuantity = (productId) => {
+    const item = cart.find(item => item._id === productId);
+    if (item.quantity > 1) {
+      adjustQuantity(productId, item.quantity - 1);
+    } else {
+      handleRemove(productId); // Optional: remove item if quantity is 1 or less
+    }
+  };
+
   const handleQuantityChange = (productId, event) => {
     const newQuantity = parseInt(event.target.value);
     if (newQuantity > 0) {
@@ -45,18 +59,38 @@ const Cart = () => {
             <tbody>
               {cart.map(item => (
                 <tr key={item._id} className="cart-item">
-                  <td><img src={item.imageUrl} alt={item.name} className="cart-item-image" /></td>
+                  <td>
+                    <img 
+                      src={`http://localhost:5001/${item.imageUrl}`} 
+                      alt={item.name} 
+                      className="cart-item-image"
+                    />
+                  </td>
                   <td>{item.name}</td>
                   <td>{item.description}</td>
                   <td>${item.price}</td>
                   <td>
-                    <input
-                      type="number"
-                      value={item.quantity}
-                      onChange={(event) => handleQuantityChange(item._id, event)}
-                      min="1"
-                      className="cart-item-quantity"
-                    />
+                    <div className="quantity-container">
+                      <button 
+                        className="quantity-button" 
+                        onClick={() => decreaseQuantity(item._id)}
+                      >
+                        -
+                      </button>
+                      <input
+                        type="number"
+                        value={item.quantity}
+                        onChange={(event) => handleQuantityChange(item._id, event)}
+                        min="1"
+                        className="cart-item-quantity"
+                      />
+                      <button 
+                        className="quantity-button" 
+                        onClick={() => increaseQuantity(item._id)}
+                      >
+                        +
+                      </button>
+                    </div>
                   </td>
                   <td>${(item.price * item.quantity).toFixed(2)}</td>
                   <td>

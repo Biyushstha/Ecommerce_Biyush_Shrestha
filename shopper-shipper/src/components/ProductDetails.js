@@ -1,48 +1,68 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
-import CartContext from '../context/CartContext';
 import Header from '../components/Header'; // Adjust path if necessary
 import Footer from '../components/Footer'; // Adjust path if necessary
-import './ProductDetails.css'; // Ensure the path is correct
+import CartContext from '../context/CartContext'; // Adjust path if necessary
+import './ProductDetails.css'; // Ensure this file exists for styling
 
 const ProductDetails = () => {
-  const { id } = useParams(); // Get product ID from URL parameters
+  const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const { addToCart } = useContext(CartContext);
-  const navigate = useNavigate();
+  const { addToCart } = useContext(CartContext); // Use CartContext
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     axios.get(`http://localhost:5001/api/products/${id}`)
       .then(response => setProduct(response.data))
-      .catch(error => console.error('Error fetching product:', error));
+      .catch(error => console.error('Error fetching product details:', error));
   }, [id]);
 
   const handleAddToCart = () => {
-    addToCart({ ...product, quantity: 1 });
-    navigate('/cart');  // Navigate to the cart page after adding product to cart
+    addToCart({ ...product, quantity });
+    alert(`${product.name} has been added to your cart!`);
   };
 
-  if (!product) return <p>Loading...</p>;
+  const increaseQuantity = () => {
+    setQuantity(prevQuantity => prevQuantity + 1);
+  };
+
+  const decreaseQuantity = () => {
+    setQuantity(prevQuantity => Math.max(prevQuantity - 1, 1)); // Ensure quantity is at least 1
+  };
+
+  if (!product) return <div>Loading...</div>;
 
   return (
-    <div>
+    <div className="product-details-page">
       <Header />
-      <div className="product-details">
-        <h1>{product.name}</h1>
-        {product.imageUrl ? (
+      <main className="product-details-main">
+        <div className="product-details-container">
           <img 
             src={`http://localhost:5001/${product.imageUrl}`} 
             alt={product.name} 
-            className="product-image" 
+            id="product-details-image" // Unique ID
+            className="product-details-image"
           />
-        ) : (
-          <p>No Image Available</p>
-        )}
-        <p>{product.description}</p>
-        <p className="product-price">${product.price}</p>
-        <button onClick={handleAddToCart} className="add-to-cart-button">Add to Cart</button>
-      </div>
+          <div className="product-details-info">
+            <h1 className="product-details-name">{product.name}</h1>
+            <p className="product-details-price">${product.price}</p>
+            <p className="product-details-description">{product.description}</p>
+            <div className="quantity-container">
+              <button className="quantity-button" onClick={decreaseQuantity}>-</button>
+              <input 
+                type="number"
+                id="quantity"
+                value={quantity}
+                readOnly
+                className="quantity-input"
+              />
+              <button className="quantity-button" onClick={increaseQuantity}>+</button>
+            </div>
+            <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
+          </div>
+        </div>
+      </main>
       <Footer />
     </div>
   );

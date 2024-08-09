@@ -67,87 +67,92 @@ const Checkout = () => {
   return (
     <div className={styles['checkout-page']}>
       <Header />
-      <main>
-        <div className={styles['checkout-container']}>
-          <div className={styles['checkout-form-container']}>
-            <div className={styles['checkout-form-card']}>
-              <h1>Checkout</h1>
-              <form onSubmit={handleSubmit}>
-                <label>
-                  Name:
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
-                <label>
-                  Address:
-                  <input
-                    type="text"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
-                <label>
-                  Email:
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
-                <label>
-                  Card Number:
-                  <input
-                    type="text"
-                    name="cardNumber"
-                    value={formData.cardNumber}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
-                {error && <p className={styles['error']}>{error}</p>}
-              </form>
-            </div>
-          </div>
-          <div className={styles['order-summary-container']}>
-            <div className={styles['order-summary-card']}>
-              <h2>Order Summary</h2>
-              {cart.map(item => (
-                <div key={item._id} className={styles['order-summary-item']}>
-                  <img src={item.imageUrl} alt={item.name} className={styles['product-image']} />
-                  <div className={styles['product-details']}>
-                    <p className={styles['product-name']}>{item.name}</p>
-                    <p className={styles['product-description']}>{item.description}</p>
-                    <p className={styles['product-price']}>${item.price.toFixed(2)}</p>
-                    <p className={styles['product-quantity']}>Quantity: {item.quantity}</p>
-                  </div>
-                </div>
-              ))}
-              <div className={styles['order-summary-total']}>
-                <p>Total Price: ${cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}</p>
-              </div>
-              <div className={styles['coupon-section']}>
+      <main className={styles['main-content']}>
+        <div className={styles['container']}>
+          <div className={styles['checkout-form']}>
+            <h1 className={styles['title']}>Checkout</h1>
+            <form onSubmit={handleSubmit}>
+              <div className={styles['form-group']}>
+                <label className={styles['label']}>Name:</label>
                 <input
                   type="text"
-                  name="coupon"
-                  value={formData.coupon}
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
-                  placeholder="Enter coupon code"
-                  className={styles['coupon-input']}
+                  className={styles['input']}
+                  required
                 />
-                <button type="button" className={styles['apply-coupon-button']}>Apply</button>
               </div>
-              <button type="button" className={styles['submit-order-button']} onClick={handleSubmit}>Submit Order</button>
+              <div className={styles['form-group']}>
+                <label className={styles['label']}>Address:</label>
+                <input
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  className={styles['input']}
+                  required
+                />
+              </div>
+              <div className={styles['form-group']}>
+                <label className={styles['label']}>Email:</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={styles['input']}
+                  required
+                />
+              </div>
+              <div className={styles['form-group']}>
+                <label className={styles['label']}>Card Number:</label>
+                <input
+                  type="text"
+                  name="cardNumber"
+                  value={formData.cardNumber}
+                  onChange={handleChange}
+                  className={styles['input']}
+                  required
+                />
+              </div>
+              {error && <p className={styles['error-message']}>{error}</p>}
               {successMessage && <p className={styles['success-message']}>{successMessage}</p>}
+            </form>
+          </div>
+          <div className={styles['order-summary']}>
+            <h2 className={styles['summary-title']}>Order Summary</h2>
+            {cart.map(item => (
+              <div key={item._id} className={styles['order-item']}>
+                <img 
+                  src={`http://localhost:5001/${item.imageUrl}`} 
+                  alt={item.name} 
+                  className={styles['item-image']} 
+                />
+                <div className={styles['item-details']}>
+                  <p className={styles['item-name']}>{item.name}</p>
+                  <p className={styles['item-description']}>{item.description}</p>
+                  <p className={styles['item-price']}>${item.price.toFixed(2)}</p>
+                  <p className={styles['item-quantity']}>Quantity: {item.quantity}</p>
+                </div>
+              </div>
+            ))}
+            <div className={styles['total-container']}>
+              <p className={styles['total-label']}>Total Price:</p>
+              <p className={styles['total-amount']}>${cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}</p>
             </div>
+            <div className={styles['coupon-container']}>
+              <input
+                type="text"
+                name="coupon"
+                value={formData.coupon}
+                onChange={handleChange}
+                placeholder="Enter coupon code"
+                className={styles['coupon-input']}
+              />
+              <button type="button" className={styles['apply-button']}>Apply</button>
+            </div>
+            <button type="submit" className={styles['submit-button']} onClick={handleSubmit}>Order</button>
           </div>
         </div>
       </main>
