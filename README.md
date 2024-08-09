@@ -65,3 +65,7 @@ npm run start-server
 **Shop URL**: http://localhost:3000/
 
 **Admin URL**: http://localhost:3000/admin/login
+
+Admin Login Credintails
+- `username`: ```` admin ````
+- `password`: ```` admin ````
