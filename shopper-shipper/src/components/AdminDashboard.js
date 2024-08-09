@@ -155,7 +155,7 @@ const AdminDashboard = () => {
   return (
     <div className="admin-dashboard">
       <header>
-        <h1>Admin Dashboard</h1>
+        <h1 id="myHeader">Admin Dashboard</h1>
       </header>
 
       {notification && <div className="notification">{notification}</div>}

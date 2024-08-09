@@ -10,13 +10,20 @@
   padding: 20px; /* Space around the content */
 }
 
+.categories-container {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
 .categories-card {
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: 220px; /* Adjusted width */
-  margin-left: 20px; /* Space from the left edge of the screen */
+  height: 430px; /* Increased height */
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .categories-card ul {
@@ -38,5 +45,20 @@
 }
 
 .categories-card a:hover {
-  color: #064201; /* Change color on hover to match header color */
+  color: #064201; 
+}
+
+.carousel-container {
+  flex: 1;
+  height: 430px; /* Increased height to match categories card */
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Ensure content fits within the container */
+}
+
+.carousel-container .carousel-item img {
+  height: 100%;
+  width: 100%; /* Ensure the image covers the full width of the container */
+  object-fit: cover; /* Cover the container area */
 }
