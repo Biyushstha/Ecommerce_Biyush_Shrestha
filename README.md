@@ -67,5 +67,5 @@ npm run start-server
 **Admin URL**: http://localhost:3000/admin/login
 
 Admin Login Credintails
-- `username`: ```` admin ````
-- `password`: ```` admin ````
+- `username`: admin 
+- `password`: admin 
