@@ -40,7 +40,7 @@ const HomePage = () => {
             </ul>
           </div>
           <div className="carousel-container">
-            <Carousel interval={3000} controls={false} indicators={true}>
+            <Carousel interval={2000} controls={false} indicators={true}>
               <Carousel.Item>
                 <img
                   className="d-block w-100"
