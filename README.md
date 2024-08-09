@@ -28,8 +28,14 @@
 - `items`: Array of objects containing:
   - `product_id`: String
   - `quantity`: Number
-- `totalAmount`: Number
+  - `totalAmount`: Number
+  - `imageUrl`: String  
 - `orderDate`: Date
+- `name`: String
+- `address`: String
+- `email`: String
+- `cardNumber`: String
+- `coupon`: String
 
 
 ### Deployment
@@ -39,7 +45,19 @@ Clone Repo:
 git clone https://github.com/Biyushstha/Ecommerce_Biyush_Shrestha.git
 ````
 
-
-
-
-
+Install Client:
+````
+npm run install-client
+````
+Install Server:
+````
+npm run install-server
+````
+Run Client:
+````
+npm run start-client
+````
+Run Server:
+````
+npm run start-server
+````
