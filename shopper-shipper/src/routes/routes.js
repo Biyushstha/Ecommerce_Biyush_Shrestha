@@ -8,7 +8,9 @@ import Checkout from '../components/Checkout';
 import { CartProvider } from '../context/CartContext';
 import MyOrders from '../pages/MyOrders';
 import AdminLogin from '../components/AdminLogin';
+
 import AdminDashboard from '../components/AdminDashboard';
+
 
 
 const AppRoutes = () => (
@@ -22,7 +24,9 @@ const AppRoutes = () => (
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/my-orders" element={<MyOrders />} />
         <Route path="/admin/login" element={<AdminLogin />} />
+       
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        
       </Routes>
     </CartProvider>
     
