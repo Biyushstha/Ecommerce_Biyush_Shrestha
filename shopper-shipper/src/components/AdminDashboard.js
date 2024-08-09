@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AdminDashboard.css';
+import { useNavigate } from 'react-router-dom';
 
 const AdminDashboard = () => {
   const [products, setProducts] = useState([]);
@@ -15,6 +16,7 @@ const AdminDashboard = () => {
   const [editProduct, setEditProduct] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [notification, setNotification] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -118,6 +120,12 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleLogout = () => {
+    // Clear user authentication details
+    localStorage.removeItem('authToken'); // Adjust if you're using a different storage method
+    navigate('/admin/login'); // Redirect to login page
+  };
+
   // Predefined category options
   const categories = [
     'Fashion',
@@ -156,6 +164,7 @@ const AdminDashboard = () => {
     <div className="admin-dashboard">
       <header>
         <h1 id="myHeader">Admin Dashboard</h1>
+        <button onClick={handleLogout} className="btn btn-danger">Logout</button>
       </header>
 
       {notification && <div className="notification">{notification}</div>}

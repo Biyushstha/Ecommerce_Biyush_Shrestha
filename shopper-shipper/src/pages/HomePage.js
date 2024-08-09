@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';  
 import Footer from '../components/Footer';  
 import './HomePage.css';
 import Carousel from 'react-bootstrap/Carousel'; // Import the Carousel component
+import axios from 'axios';
 
 // Import local images
 import img1 from '../Image/img 1.jpg';
@@ -25,11 +26,19 @@ const categories = [
 ];
 
 const HomePage = () => {
+  const [recentProducts, setRecentProducts] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:5001/api/products?recent=true') // Update the endpoint as needed
+      .then(response => setRecentProducts(response.data))
+      .catch(error => console.error('Error fetching recent products:', error));
+  }, []);
+
   return (
     <div className="home-page">
       <Header />
       <main className="main-content">
-        <div className="categories-container">
+        <div className="categories-carousel-container">
           <div className="categories-card">
             <ul>
               {categories.map((category, index) => (
@@ -65,6 +74,25 @@ const HomePage = () => {
             </Carousel>
           </div>
         </div>
+        <section className="recent-products">
+          <h2>Recently Added</h2>
+          <div className="products-grid">
+            {recentProducts.slice(0, 4).map(product => (
+              <div key={product._id} className="product-card">
+                <img 
+                  src={`http://localhost:5001/${product.imageUrl}`} 
+                  alt={product.name} 
+                  className="product-list-image"
+                />
+                <div className="product-info">
+                  <h3>{product.name}</h3>
+                  <p>${product.price}</p>
+                  <Link to={`/products/${product._id}`} className="view-details">View Details</Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
       </main>
       <Footer />
     </div>

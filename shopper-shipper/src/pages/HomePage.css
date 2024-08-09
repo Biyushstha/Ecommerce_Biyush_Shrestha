@@ -6,14 +6,14 @@
 
 .main-content {
   display: flex;
-  justify-content: flex-start;
-  padding: 20px; /* Space around the content */
+  flex-direction: column;
+  padding: 20px;
 }
 
-.categories-container {
+.categories-carousel-container {
   display: flex;
   gap: 20px;
-  width: 100%;
+  margin-bottom: 40px; /* Add spacing below the carousel and category card */
 }
 
 .categories-card {
@@ -23,7 +23,6 @@
   padding: 20px;
   width: 220px; /* Adjusted width */
   height: 430px; /* Increased height */
-  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .categories-card ul {
@@ -50,7 +49,7 @@
 
 .carousel-container {
   flex: 1;
-  height: 430px; /* Increased height to match categories card */
+  height: 430px; /* Height to match categories card */
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -61,4 +60,72 @@
   height: 100%;
   width: 100%; /* Ensure the image covers the full width of the container */
   object-fit: cover; /* Cover the container area */
+}
+
+.recent-products {
+  padding: 20px;
+  margin-top: 40px; /* Add spacing above the recent products section */
+}
+
+.recent-products h2 {
+  font-size: 28px; /* Larger title size */
+  font-weight: 700; /* Bold title */
+  margin-bottom: 20px;
+}
+
+.products-grid {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.product-card {
+  width: calc(25% - 16px); /* Adjust width to fit 4 items per row minus gap */
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center-align contents vertically */
+  gap: 8px;
+  min-height: 400px; /* Increase height to ensure space for the image and text */
+}
+
+.product-list-image {
+  width: 100%;
+  height: 150px; /* Adjust height to fit in the card */
+  object-fit: cover; /* Ensure image covers the space without distortion */
+  border-radius: 4px;
+}
+
+.product-info {
+  text-align: center; /* Center-align text inside the product info section */
+}
+
+.product-info h3 {
+  font-size: 24px; /* Larger title size */
+  font-weight: bold; /* Bold title */
+  margin: 10px 0;
+}
+
+.product-info p {
+  font-size: 22px; /* Larger price size */
+  font-weight: bold; /* Bold price */
+  color: #064201; /* Your preferred color */
+  margin: 10px 0;
+}
+
+.view-details {
+  background-color: #f5c518; /* Yellow color */
+  color: #000;
+  padding: 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  width: 100%; /* Full width button */
+  text-align: center; /* Center text inside the button */
+  box-sizing: border-box; /* Ensure padding is included in width */
 }

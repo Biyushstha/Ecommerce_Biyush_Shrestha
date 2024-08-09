@@ -109,9 +109,9 @@ header {
 }
 
 .checkout-button {
-  background-color: #064201; /* Dark green for checkout button */
-  color: white;
+  background-color: #f5c518; 
   border: none;
+  color: white;
   padding: 12px 20px;
   border-radius: 4px;
   cursor: pointer;
@@ -119,7 +119,7 @@ header {
 }
 
 .checkout-button:hover {
-  background-color: #046200; /* Lighter green on hover */
+  background-color: #c89f0c; /* Lighter green on hover */
 }
 
 /* Footer styling */
